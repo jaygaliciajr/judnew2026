@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -73,22 +72,24 @@ export function SiteHeader() {
       <div className="mx-auto hidden max-w-[var(--container)] px-5 pt-4 sm:px-6 md:block lg:px-8 xl:px-10">
         <div
           className={cn(
-            "theme-header-shell relative grid grid-cols-[auto_1fr_auto] items-center gap-6 rounded-full border px-4 py-3 backdrop-blur-2xl transition duration-300 sm:px-5",
-            scrolled &&
-              "theme-header-shell-scrolled"
+            "theme-header-shell relative flex items-center justify-between gap-6 rounded-full border px-4 py-3 backdrop-blur-2xl transition duration-300 sm:px-5",
+            scrolled && "theme-header-shell-scrolled"
           )}
         >
           <div className="theme-header-glow pointer-events-none absolute inset-0 rounded-full" />
           <div className="theme-header-topline pointer-events-none absolute inset-x-6 top-0 h-px" />
-          <Link href="/" aria-label={siteContent.name} className="relative z-10 flex items-center justify-center">
-            <ThemeMark alt={`${siteContent.name} mark`} size={44} className="h-11 w-11" />
-          </Link>
 
-          <nav className="relative z-10 flex items-center justify-center gap-8">
-            {primaryNavItems.map((item) => (
-              <NavLink key={item.href} href={item.href} label={item.label} />
-            ))}
-          </nav>
+          <div className="relative z-10 flex items-center gap-8 lg:gap-10">
+            <Link href="/" aria-label={siteContent.name} className="flex items-center justify-center">
+              <ThemeMark alt={`${siteContent.name} mark`} size={40} className="h-10 w-10" />
+            </Link>
+
+            <nav className="flex items-center gap-7 lg:gap-8">
+              {primaryNavItems.map((item) => (
+                <NavLink key={item.href} href={item.href} label={item.label} />
+              ))}
+            </nav>
+          </div>
 
           <div className="relative z-10 flex items-center justify-end gap-3">
             <ThemeToggle />
@@ -96,7 +97,6 @@ export function SiteHeader() {
               {siteContent.ctas.primary}
             </ButtonLink>
           </div>
-
         </div>
       </div>
       <MobileNav open={open} onClose={() => setOpen(false)} onToggle={() => setOpen((value) => !value)} />
